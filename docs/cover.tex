@@ -1,0 +1,58 @@
+%%==============================================================================
+%% cover.tex — title page. \input from report.lhs.
+%%==============================================================================
+\begin{titlepage}
+\thispagestyle{empty}
+
+%% Decorative elements (TikZ overlay, relative to physical page corners)
+\begin{tikzpicture}[remember picture, overlay]
+  %% Accent bar — full-height, left edge
+  \fill[cpaccent]
+    (current page.north west)
+    rectangle ([xshift=14mm]current page.south west);
+  %% Thin rule below the title block
+  \draw[cpaccent, line width=0.5pt]
+    ([xshift=0mm,  yshift=-106mm]current page.north west) --
+    ([xshift=-20mm,yshift=-106mm]current page.north east);
+  %% Thin rule above the footer block
+  \draw[cpaccent, line width=0.5pt]
+    ([xshift=0mm,  yshift=28mm]current page.south west) --
+    ([xshift=-20mm,yshift=28mm]current page.south east);
+\end{tikzpicture}
+
+%% ---- Title block -----------------------------------------------------------
+\vspace*{62mm}
+
+{\Huge\bfseries REPLACE\_WITH\_TITLE\par}
+\vspace{3mm}
+{\Large\color{cpaccent} A Haskell Library for the Algebra of Programming\par}
+
+\vspace{8mm}
+
+%% Short description — 2–3 lines saying what the library is about
+{\normalsize\itshape
+A personal library implementing categorical recursion patterns —
+catamorphisms, anamorphisms, and hylomorphisms — over standard Haskell
+datatypes, with equational proofs of their key fusion and cancellation laws.
+\par}
+
+\vspace{18mm}
+
+{\large REPLACE\_WITH\_AUTHOR\_NAME\par}
+
+%% ---- Footer block ----------------------------------------------------------
+\vfill
+
+%% Version + date on the same line
+{\small
+\begin{tabular}{ll}
+Version   & REPLACE\_WITH\_VERSION \\
+Released  & \today \\
+Licence   & MIT \\
+Repository & \texttt{https://github.com/REPLACE\_WITH\_REPO} \\
+\end{tabular}
+\par}
+
+\vspace{16mm}
+
+\end{titlepage}

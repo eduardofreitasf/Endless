@@ -1,0 +1,179 @@
+%%==============================================================================
+%% ap-report.sty
+%%
+%% Page layout, fonts, colors and structural environments for the report.
+%% Notation macros live in ap-symbols.sty (loaded below) and lhs2TeX
+%% %format rules live in ap-format.fmt (included from the main .lhs file,
+%% since %format is an lhs2TeX directive, not a LaTeX one).
+%%==============================================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ap-report}[2026/06/30 Algebra of Programming report styling]
+
+%%------------------------------------------------------------------------------
+%% Encoding / fonts
+%% Latin Modern Sans is the document font throughout: same family used on the
+%% cover, applied globally so cover and body match.
+%%------------------------------------------------------------------------------
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}   % sans-serif everywhere
+
+%%------------------------------------------------------------------------------
+%% Page geometry
+%%------------------------------------------------------------------------------
+\RequirePackage[a4paper,margin=25mm]{geometry}
+\RequirePackage{parskip}
+\RequirePackage{fancyhdr}
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+\RequirePackage{booktabs}
+\RequirePackage{array}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%------------------------------------------------------------------------------
+%% Section title styling
+%%------------------------------------------------------------------------------
+\RequirePackage{titlesec}
+\titleformat{\section}{\LARGE\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{1em}{}
+
+%%------------------------------------------------------------------------------
+%% Math
+%%------------------------------------------------------------------------------
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\allowdisplaybreaks
+
+%%------------------------------------------------------------------------------
+%% Diagrams (commutative squares / triangles for recursion patterns)
+%%------------------------------------------------------------------------------
+\RequirePackage[all]{xy}
+
+%%------------------------------------------------------------------------------
+%% Color
+%%------------------------------------------------------------------------------
+\RequirePackage{xcolor}
+\definecolor{cpaccent}{HTML}{1B6FA8}
+\definecolor{codebg}{HTML}{F4F4F4}
+\definecolor{termfg}{HTML}{D0D0D0}    % terminal text colour
+\definecolor{termbg}{HTML}{1E1E2E}    % terminal background (dark)
+\definecolor{termborder}{HTML}{4E9FD4} % terminal top-bar accent
+
+%%------------------------------------------------------------------------------
+%% Links
+%%------------------------------------------------------------------------------
+\RequirePackage[colorlinks=true,linkcolor=cpaccent,citecolor=cpaccent,urlcolor=cpaccent]{hyperref}
+
+%%------------------------------------------------------------------------------
+%% Code listings
+%% Two styles:
+%%   cplisting  — for short inline/non-literate LaTeX snippets (light bg)
+%%   cpterm     — for GHCi / shell sessions shown in unittest environments
+%%------------------------------------------------------------------------------
+\RequirePackage{listings}
+\RequirePackage{fancyvrb}
+
+\lstdefinestyle{cplisting}{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    showstringspaces=false,
+    frame=single,
+    framesep=5pt,
+    rulecolor=\color{black!15}
+}
+\lstdefinestyle{cpterm}{
+    backgroundcolor=\color{termbg},
+    basicstyle=\ttfamily\small\color{termfg},
+    breaklines=true,
+    showstringspaces=false,
+    frame=none
+}
+\lstset{style=cplisting}   % default
+
+%%------------------------------------------------------------------------------
+%% tcolorbox — used for the unittest environment below
+%%------------------------------------------------------------------------------
+\RequirePackage[listings,skins,breakable]{tcolorbox}
+
+%%------------------------------------------------------------------------------
+%% unittest — dark terminal box with GHCi label.
+%% Usage:
+%%   \begin{unittest}
+%%   ghci> myFunction arg
+%%   result
+%%   \end{unittest}
+%% Content is typeset verbatim in monospace; no \begin{lstlisting} needed.
+%%------------------------------------------------------------------------------
+\newcounter{unittest}
+\newtcblisting[use counter=unittest]{unittest}{
+  listing only,
+  listing engine=listings,
+  listing options={style=cpterm},
+  colback=termbg,
+  colframe=termborder,
+  coltitle=white,
+  fonttitle=\ttfamily\small\bfseries,
+  title={GHCi \thetcbcounter},
+  arc=2pt,
+  top=2pt, bottom=2pt, left=4pt, right=4pt,
+  titlerule=0pt,
+  attach boxed title to top left={yshift=-1pt},
+  boxed title style={
+    colback=termborder,
+    colframe=termborder,
+    arc=2pt,
+    left=4pt, right=4pt, top=2pt, bottom=2pt
+  }
+}
+
+%%------------------------------------------------------------------------------
+%% Theorem-like environments for properties and lemmas
+%%------------------------------------------------------------------------------
+\RequirePackage{amsthm}
+\theoremstyle{plain}
+\newtheorem{property}{Property}
+\newtheorem{lemma}{Lemma}
+
+%%------------------------------------------------------------------------------
+%% Index
+%%------------------------------------------------------------------------------
+\RequirePackage{makeidx}
+\makeindex
+
+%%------------------------------------------------------------------------------
+%% Proof / calculation environment
+%%   \begin{calculation}
+%%     expr
+%%   \jstep{=}{justification}
+%%     expr'
+%%   \qedstep
+%%   \end{calculation}
+%%------------------------------------------------------------------------------
+\newenvironment{calculation}{\begin{eqnarray*}&&}{\end{eqnarray*}}
+\newcommand{\jstep}[2]{\\ &#1& \rule{2em}{0pt}\{\,\mbox{\small #2}\,\}\nonumber\\&&}
+\newcommand{\qedstep}{\\&\square&}
+
+%% Curly-brace piecewise definitions
+\newenvironment{lcbr}{\left\{\begin{array}{l}}{\end{array}\right.}
+
+%%------------------------------------------------------------------------------
+%% Section-per-topic helper
+%%------------------------------------------------------------------------------
+\newcommand{\Topic}[1]{\section{#1}}
+
+%%------------------------------------------------------------------------------
+%% Notation macros
+%%------------------------------------------------------------------------------
+\RequirePackage{ap-symbols}
+
+\endinput

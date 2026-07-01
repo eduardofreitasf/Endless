@@ -1,0 +1,38 @@
+# ============================================================
+# LaTeX build artifacts — generated automatically, do not commit
+# ============================================================
+
+# lhs2TeX intermediate output
+report.tex
+
+# pdflatex auxiliary files
+*.aux
+*.log
+*.toc        # table of contents
+*.lof        # list of figures
+*.lot        # list of tables
+*.out        # hyperref PDF bookmarks
+*.ptb        # booktabs/toc helper
+
+# Index
+*.idx        # raw index entries
+*.ilg        # makeindex log
+*.ind        # processed index
+
+# Bibliography
+*.bbl        # processed bibliography
+*.blg        # bibtex log
+
+# tcolorbox listings cache
+*.listing
+
+# Final output — include this if you want to commit a built PDF,
+# exclude it (uncomment) if you only want source in the repo.
+# report.pdf
+
+# Editor / OS noise
+.DS_Store
+*~
+*.swp
+*.swo
+\#*\#

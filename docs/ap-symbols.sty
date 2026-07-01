@@ -1,0 +1,91 @@
+%%==============================================================================
+%% ap-symbols.sty
+%%
+%% Plain LaTeX macros for Algebra-of-Programming notation, for use in running
+%% prose and inside math environments (eqnarray*, the `calculation` environment,
+%% xymatrix diagrams, etc).
+%%
+%% NOTE: this file is for symbols you type yourself in text/math mode.
+%% It does NOT control how literal Haskell tokens inside \begin{code} blocks
+%% are rendered — that is the job of ap-format.fmt (lhs2TeX %format rules).
+%% Use this file when writing things like:  |cata g| renders as the Haskell
+%% term, but writing \cata{g} directly in an equation renders the math symbol.
+%%
+%% Organisation: one section per family of concepts. Add new macros to the
+%% matching section, or create a new section if nothing fits. The final
+%% section is a scratch area for ad-hoc additions before they're sorted.
+%%==============================================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ap-symbols}[2026/06/30 Algebra of Programming notation]
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+%%------------------------------------------------------------------------------
+%% 1. SETS AND NUMBER DOMAINS
+%%------------------------------------------------------------------------------
+\newcommand{\N}{\mathbb{N}}            % naturals
+\newcommand{\Z}{\mathbb{Z}}            % integers
+\newcommand{\Q}{\mathbb{Q}}            % rationals
+\newcommand{\R}{\mathbb{R}}            % reals
+\newcommand{\B}{\mathbb{B}}            % booleans
+\newcommand{\unitobj}{\mathbf{1}}      % terminal object / unit type
+
+%%------------------------------------------------------------------------------
+%% 2. CATEGORICAL BASICS (composition, products, coproducts, projections)
+%%------------------------------------------------------------------------------
+\newcommand{\comp}{\mathbin{\cdot}}                 % function composition .
+\newcommand{\idd}{\mathit{id}}                      % identity, "id" already common but explicit version
+\newcommand{\p}[1]{\pi_{#1}}                        % projection pi_1, pi_2, ...
+\newcommand{\conj}[2]{\mathopen{\langle}#1, #2\mathclose{\rangle}}   % split <f,g>
+\newcommand{\alt}[2]{\mathopen{[}#1, #2\mathclose{]}}                % either [f,g]
+\newcommand{\prodtype}{\mathbin{\times}}            % product type A x B
+\newcommand{\coprodtype}{\mathbin{+}}               % coproduct type A + B
+\newcommand{\inj}[1]{i_{#1}}                        % injections i_1, i_2
+
+%%------------------------------------------------------------------------------
+%% 3. RECURSION PATTERNS (catamorphism, anamorphism, hylomorphism, ...)
+%%------------------------------------------------------------------------------
+% Banana brackets (catamorphism)
+\newcommand{\cata}[1]{\mathopen{\llparenthesis}#1\mathclose{\rrparenthesis}}
+% Lens brackets (anamorphism) — built from a serif font fragment, as in the
+% original course material, kept here since no standard symbol font has them.
+\DeclareTextFontCommand{\lmrchar}{\fontfamily{lmr}\selectfont}
+\newcommand{\lanabracket}{\mathopen{\lmrchar{[\!(}}}
+\newcommand{\ranabracket}{\mathopen{\lmrchar{)\!]}}}
+\newcommand{\ana}[1]{\lanabracket\,#1\,\ranabracket}
+% Envelope brackets (hylomorphism)
+\newcommand{\hylo}[2]{\mathopen{\llbracket}#1, #2\mathclose{\rrbracket}}
+% Paramorphism (cata with access to the original substructure) — common enough
+% to predefine; uses a barred banana bracket.
+\newcommand{\para}[1]{\mathopen{\llparenthesis}#1\mathclose{\rrparenthesis}_{\mathit{p}}}
+
+%%------------------------------------------------------------------------------
+%% 4. POINT-FREE COMBINATORS
+%%------------------------------------------------------------------------------
+\newcommand{\trans}[1]{\overline{#1\rule{0pt}{.6em}}}   % transpose
+\newcommand{\uncurryop}[1]{\widehat{#1}}                % uncurry
+\newcommand{\curryop}[1]{\overline{#1}}                 % curry
+\newcommand{\kons}[1]{\underline{#1}}                   % constant function
+\newcommand{\bang}{{!}}                                 % unique arrow to 1
+
+%%------------------------------------------------------------------------------
+%% 5. PROOF / CALCULATION NOTATION
+%%------------------------------------------------------------------------------
+\newcommand{\deff}{\stackrel{\mathrm{def}}{=}}   % "is defined as"
+\newcommand{\implied}{\mathbin{\Leftarrow}}      % AoP-style proof step arrow
+\newcommand{\isoo}{\mathbin{\cong}}              % isomorphism
+
+%%------------------------------------------------------------------------------
+%% 6. YOUR OWN SYMBOLS — add below this line
+%%------------------------------------------------------------------------------
+% Copy this template and fill it in:
+%
+% \newcommand{\macroName}[NUMBER_OF_ARGS]{DEFINITION}
+%
+% Examples:
+% \newcommand{\fmap}{\mathsf{fmap}}
+% \newcommand{\map}[1]{\mathsf{map}\ #1}
+
+\endinput

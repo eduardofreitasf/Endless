@@ -1,0 +1,60 @@
+%%==============================================================================
+%% appendix.tex — \input from report.lhs, after \appendix is called
+%%==============================================================================
+\section{How to use this template}
+\label{app:howto}
+
+This appendix is a quick reference for working with the template itself;
+remove it from the final submission if you don't want it in the deliverable.
+
+\subsection*{Adding a new module section}
+Copy \texttt{sections/00-template.lhs}, rename it, fill in \verb|\Topic{}|,
+the diagram, the code, and any \texttt{property}/\texttt{calculation}/
+\texttt{unittest} blocks, then add a matching \texttt{\%include} line in
+\texttt{report.lhs}.
+
+\subsection*{Adding notation}
+Math you type yourself (prose, equations, diagrams) goes in
+\texttt{ap-symbols.sty}; rules controlling how literal Haskell renders go in
+\texttt{ap-format.fmt}. See \autoref{tab:notation} for the symbols already
+defined.
+
+\subsection*{Figures}
+Use a standard \texttt{figure} environment with \texttt{\textbackslash
+includegraphics} for images, or a \texttt{tikzpicture} for diagrams drawn
+directly in LaTeX (see \autoref{fig:example-tree} for an example with no
+external image file needed).
+
+\subsection*{Tables}
+Use \texttt{booktabs} (\texttt{\textbackslash toprule}/\texttt{\textbackslash
+midrule}/\texttt{\textbackslash bottomrule}) rather than full grid lines —
+it reads as more professional and is already loaded.
+
+\subsection*{Citations}
+Add entries to \texttt{report.bib} and cite with \verb|\cite{key}|, e.g.
+\verb|\cite{bird1997algebra}|.
+
+\subsection*{Properties and proofs}
+\begin{verbatim}
+\begin{property}
+  ... statement ...
+\end{property}
+
+\begin{calculation}
+  expr
+\jstep{=}{justification}
+  expr'
+\qedstep
+\end{calculation}
+\end{verbatim}
+
+\subsection*{Unit tests (GHCi sessions)}
+Write content directly inside \texttt{unittest} — no \verb|\begin{lstlisting}| wrapper needed:
+\begin{verbatim}
+\begin{unittest}
+ghci> myFunction arg
+result
+\end{unittest}
+\end{verbatim}
+The box is automatically numbered and labelled \textbf{GHCi} with a dark
+terminal style.

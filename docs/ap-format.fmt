@@ -1,0 +1,90 @@
+%%==============================================================================
+%% ap-format.fmt
+%%
+%% lhs2TeX %format rules: these control how literal Haskell tokens, written
+%% inside |bars| or \begin{code}...\end{code} blocks, are TYPESET. This is
+%% separate from ap-symbols.sty (which is for macros you type directly in
+%% prose/math). A token defined here will render with the chosen symbol
+%% EVERY time it appears in code, automatically — that's the whole point of
+%% using literate Haskell instead of plain LaTeX.
+%%
+%% Organisation mirrors ap-symbols.sty: one section per family. Add new rules
+%% to the matching section. Rules are matched textually against your actual
+%% Haskell source, so the left-hand side must be valid Haskell syntax/names.
+%%
+%% Reference: https://hackage.haskell.org/package/lhs2tex
+%%==============================================================================
+
+%include polycode.fmt
+
+%%------------------------------------------------------------------------------
+%% 1. STANDARD COMBINATORS / OPERATORS
+%%------------------------------------------------------------------------------
+%format .       = "\comp "
+%format ===     = "\equiv "
+%format >< 	= "\prodtype "
+%format -|-     = "\coprodtype "
+%format ++      = "\mathbin{+\!\!+}"
+%format .&&&.   = "\wedge "
+%format .<=.    = "\leq "
+%format .==>.   = "\Rightarrow "
+%format .<==>.  = "\Leftrightarrow "
+%format |->     = "\mapsto "
+
+%%------------------------------------------------------------------------------
+%% 2. PROJECTIONS / INJECTIONS / STRUCTURAL FUNCTIONS
+%%------------------------------------------------------------------------------
+%format fst     = "\p{1}"
+%format snd     = "\p{2}"
+%format p1      = "\p{1}"
+%format p2      = "\p{2}"
+%format i1      = "i_1"
+%format i2      = "i_2"
+%format Left    = "i_1"
+%format Right   = "i_2"
+
+%%------------------------------------------------------------------------------
+%% 3. RECURSION PATTERNS
+%%   These match the *shape* of a function application, e.g. writing
+%%   (cata g) in your Haskell source renders as the banana-bracket symbol.
+%%   Add one variant per recursive datatype as your library grows
+%%   (cataList, cataTree, anaList, ... already provided as a starting set).
+%%------------------------------------------------------------------------------
+%format (cata (g))            = "\cata{" g "}"
+%format (cata' (f) (g))       = "\lanabracket\;\!" f "\:" g "\:\!\ranabracket"
+%format (ana (g))             = "\ana{" g "}"
+%format (hylo (g) (h))        = "\hylo{" g "}{" h "}"
+%format (para (g))            = "\para{" g "}"
+%format (cataList (g))        = "\cata{" g "}"
+%format (anaList (g))         = "\ana{" g "}"
+%format (cataNat (g))         = "\cata{" g "}"
+%format (cataTree (f) (g))    = "\cata{" f "\:" g "}"
+%format (anaTree (f) (g))     = "\ana{" f "\:" g "}"
+
+%%------------------------------------------------------------------------------
+%% 4. POINT-FREE COMBINATORS
+%%------------------------------------------------------------------------------
+%format (split (x) (y))   = "\conj{" x "}{" y "}"
+%format (either (a) (b))  = "\alt{" a "}{" b "}"
+%format (const (f))       = "\kons{" f "}"
+%format (curry (f))       = "\curryop{" f "}"
+%format (uncurry (f))     = "\uncurryop{" f "}"
+
+%%------------------------------------------------------------------------------
+%% 5. COMMON TYPE NAMES
+%%------------------------------------------------------------------------------
+%format Integer  = "\Z "
+%format Rational = "\Q "
+%format Nat0     = "\N_0"
+%format Either a b = a "\coprodtype " b
+
+%%------------------------------------------------------------------------------
+%% 6. YOUR OWN RULES — add below this line
+%%------------------------------------------------------------------------------
+% Two common patterns:
+%
+%   simple token substitution:
+%     %format tokenName = "\LaTeX command or symbol"
+%
+%   function-application pattern (renders e.g. (myFun a b) specially):
+%     %format (myFun (a) (b)) = "\someSymbol{" a "}{" b "}"

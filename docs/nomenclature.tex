@@ -1,0 +1,55 @@
+%%==============================================================================
+%% nomenclature.tex — \input from report.lhs
+%% Two tables: (1) math notation quick-reference; (2) acronyms.
+%% Add a row any time you introduce a new symbol or acronym.
+%%==============================================================================
+\section*{Notation}
+\addcontentsline{toc}{section}{Notation}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Symbol} & \textbf{Meaning} \\
+\midrule
+$\cata{g}$              & catamorphism with gene $g$ \\
+$\ana{g}$               & anamorphism with gene $g$ \\
+$\hylo{g}{h}$           & hylomorphism \\
+$\conj{f}{g}$           & split / fork $\langle f, g\rangle$ \\
+$\alt{f}{g}$            & either / case analysis $[f, g]$ \\
+$f \comp g$             & function composition \\
+$\trans{f}$             & transpose of $f$ \\
+$\kons{x}$              & constant function returning $x$ \\
+$\N,\ \Z,\ \Q,\ \R,\ \B$ & naturals, integers, rationals, reals, booleans \\
+$A \prodtype B$         & product type \\
+$A \coprodtype B$       & coproduct (sum) type \\
+$\deff$                 & "is defined as" \\
+$\implied$              & proof step ("follows from") \\
+\bottomrule
+\end{tabular}
+\caption{Notation quick-reference. Macros are defined in \texttt{ap-symbols.sty}.}
+\label{tab:notation}
+\end{table}
+
+\section*{Acronyms}
+\addcontentsline{toc}{section}{Acronyms}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Acronym} & \textbf{Meaning} \\
+\midrule
+AoP  & Algebra of Programming \\
+ADT  & Algebraic Data Type \\
+FP   & Functional Programming \\
+GHC  & Glasgow Haskell Compiler \\
+GHCi & GHC interactive (REPL) \\
+REPL & Read--Eval--Print Loop \\
+\bottomrule
+\end{tabular}
+\caption{Acronyms used throughout this document.}
+\label{tab:acronyms}
+\end{table}
+
+\newpage
