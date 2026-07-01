@@ -11,7 +11,7 @@ cabal-version:      3.0
 --   http://haskell.org/cabal/users-guide/
 --
 -- The name of the package.
-name:               algorithms-in-haskell
+name:               endless
 
 -- The package version.
 -- See the Haskell package versioning policy (PVP) for standards
@@ -59,7 +59,7 @@ library
     import:           warnings
 
     -- Modules exported by the library.
-    exposed-modules:  MyLib
+    exposed-modules:  Algebra, Maybe
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -68,7 +68,7 @@ library
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.18.3.0
+    build-depends:    base >=4.18 && <5
 
     -- Directories containing source files.
     hs-source-dirs:   lib
@@ -76,7 +76,7 @@ library
     -- Base language which the package is written in.
     default-language: Haskell2010
 
-test-suite algorithms-in-haskell-test
+test-suite endless-test
     -- Import common warning flags.
     import:           warnings
 
@@ -84,7 +84,9 @@ test-suite algorithms-in-haskell-test
     default-language: Haskell2010
 
     -- Modules included in this executable, other than Main.
-    -- other-modules:
+    other-modules:
+        AlgebraSpec,
+        MaybeSpec
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
@@ -100,5 +102,8 @@ test-suite algorithms-in-haskell-test
 
     -- Test dependencies.
     build-depends:
-        base ^>=4.18.3.0,
-        algorithms-in-haskell
+        base >=4.18 && <5,
+        endless,
+        tasty,
+        tasty-hunit,
+        tasty-quickcheck
