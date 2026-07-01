@@ -8,20 +8,20 @@ report.tex
 # pdflatex auxiliary files
 *.aux
 *.log
-*.toc        # table of contents
-*.lof        # list of figures
-*.lot        # list of tables
-*.out        # hyperref PDF bookmarks
-*.ptb        # booktabs/toc helper
+*.toc
+*.lof
+*.lot
+*.out
+*.ptb
 
 # Index
-*.idx        # raw index entries
-*.ilg        # makeindex log
-*.ind        # processed index
+*.idx
+*.ilg
+*.ind
 
 # Bibliography
-*.bbl        # processed bibliography
-*.blg        # bibtex log
+*.bbl
+*.blg
 
 # tcolorbox listings cache
 *.listing
