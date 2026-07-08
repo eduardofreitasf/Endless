@@ -11,7 +11,7 @@ cabal-version:      3.0
 --   http://haskell.org/cabal/users-guide/
 --
 -- The name of the package.
-name:               endless
+name:               Endless
 
 -- The package version.
 -- See the Haskell package versioning policy (PVP) for standards
@@ -61,7 +61,8 @@ library
     -- Modules exported by the library.
     exposed-modules:  Algebra,
                       Maybe,
-                      Nat
+                      Nat,
+                      List
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -89,7 +90,8 @@ test-suite endless-test
     other-modules:
         AlgebraSpec,
         MaybeSpec,
-        NatSpec
+        NatSpec,
+        ListSpec
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
@@ -106,7 +108,7 @@ test-suite endless-test
     -- Test dependencies.
     build-depends:
         base >=4.18 && <5,
-        endless,
+        Endless,
         tasty,
         tasty-hunit,
         tasty-quickcheck
