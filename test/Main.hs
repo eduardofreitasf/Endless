@@ -1,6 +1,7 @@
 module Main (main) where
 
 import qualified AlgebraSpec
+import qualified ListSpec
 import qualified MaybeSpec
 import qualified NatSpec
 import Test.Tasty (defaultMain, testGroup)
@@ -12,5 +13,6 @@ main =
       "Endless Tests"
       [ AlgebraSpec.tests,
         MaybeSpec.tests,
-        NatSpec.tests
+        NatSpec.tests,
+        ListSpec.tests
       ]
