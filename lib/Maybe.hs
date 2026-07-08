@@ -13,6 +13,16 @@
 module Maybe where
 
 import Algebra
+  ( cond,
+    false,
+    i1,
+    i2,
+    nil,
+    nothing,
+    true,
+    (-|-),
+    (\/),
+  )
 
 -- Datatype definition -------------------------------------------------------------
 
