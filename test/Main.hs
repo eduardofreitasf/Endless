@@ -2,7 +2,8 @@ module Main (main) where
 
 import qualified AlgebraSpec
 import qualified MaybeSpec
-import Test.Tasty
+import qualified NatSpec
+import Test.Tasty (defaultMain, testGroup)
 
 main :: IO ()
 main =
@@ -10,5 +11,6 @@ main =
     testGroup
       "Endless Tests"
       [ AlgebraSpec.tests,
-        MaybeSpec.tests
+        MaybeSpec.tests,
+        NatSpec.tests
       ]
