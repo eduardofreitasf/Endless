@@ -1,82 +1,83 @@
--- |
--- Module      : Algebra
--- Description : Core functional combinators for program calculation
--- Copyright   : (c) 2026 Eduardo Freitas Fernandes
--- License     : MIT
--- Maintainer  : eduardof.fernandes05@gmail.com
--- Stability   : experimental
---
--- This module provides a collection of fundamental functional operators
--- used throughout the library, exposing the structure of products, coproducts,
--- and exponentials.
-module Algebra
-  ( -- * Projections and Injections
-    p1,
-    p2,
-    i1,
-    i2,
+{- |
+Module      : Algebra
+Description : Core functional combinators for program calculation
+Copyright   : (c) 2026 Eduardo Freitas Fernandes
+License     : MIT
+Maintainer  : eduardof.fernandes05@gmail.com
+Stability   : experimental
 
-    -- * Product combinators
-    (/\),
-    (><),
+This module provides a collection of fundamental functional operators
+used throughout the library, exposing the structure of products, coproducts,
+and exponentials.
+-}
+module Algebra (
+  -- * Projections and Injections
+  p1,
+  p2,
+  i1,
+  i2,
 
-    -- * Coproduct combinators
-    (\/),
-    (-|-),
+  -- * Product combinators
+  (/\),
+  (><),
 
-    -- * McCarthy's Conditional
-    guard,
-    cond,
+  -- * Coproduct combinators
+  (\/),
+  (-|-),
 
-    -- * Exponentiation
-    ap,
-    rexp,
-    lexp,
+  -- * McCarthy's Conditional
+  guard,
+  cond,
 
-    -- * Natural Isomorphisms
-    swap,
-    assocr,
-    assocl,
-    coswap,
-    coassocr,
-    coassocl,
-    distr,
-    distl,
-    undistr,
-    undistl,
-    subr,
-    subl,
-    cosubr,
-    cosubl,
-    distp,
-    dists,
-    flatr,
-    flatl,
-    br,
-    bl,
-    lambda,
-    colambda,
+  -- * Exponentiation
+  ap,
+  rexp,
+  lexp,
 
-    -- * Basic Functions
-    dup,
-    join,
-    (!),
-    zero,
-    one,
-    nil,
-    cons,
-    add,
-    mul,
-    conc,
-    umax,
-    true,
-    false,
-    nothing,
-    nat0,
+  -- * Natural Isomorphisms
+  swap,
+  assocr,
+  assocl,
+  coswap,
+  coassocr,
+  coassocl,
+  distr,
+  distl,
+  undistr,
+  undistl,
+  subr,
+  subl,
+  cosubr,
+  cosubl,
+  distp,
+  dists,
+  flatr,
+  flatl,
+  br,
+  bl,
+  lambda,
+  colambda,
 
-    -- * Iteration
-    while,
-  )
+  -- * Basic Functions
+  dup,
+  join,
+  (!),
+  zero,
+  one,
+  nil,
+  cons,
+  add,
+  mul,
+  conc,
+  umax,
+  true,
+  false,
+  nothing,
+  nat0,
+
+  -- * Iteration
+  while,
+)
 where
 
 -- Projections and Injections -----------------------------------------------------------

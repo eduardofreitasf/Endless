@@ -11,8 +11,8 @@ main =
   defaultMain $
     testGroup
       "Endless Tests"
-      [ AlgebraSpec.tests,
-        MaybeSpec.tests,
-        NatSpec.tests,
-        ListSpec.tests
+      [ AlgebraSpec.tests
+      , MaybeSpec.tests
+      , NatSpec.tests
+      , ListSpec.tests
       ]

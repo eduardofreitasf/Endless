@@ -1,28 +1,29 @@
 {-# LANGUAGE NPlusKPatterns #-}
 
--- |
--- Module      : Maybe
--- Description : Maybe as a datatype with base functor Either () a
--- Copyright   : (c) 2026 Eduardo Freitas Fernandes
--- License     : MIT
--- Maintainer  : eduardof.fernandes05@gmail.com
--- Stability   : experimental
---
--- This module provides simple helpers for working with the standard Maybe
--- datatype, viewed through its base functor 'Either () a'.
+{- |
+Module      : Maybe
+Description : Maybe as a datatype with base functor Either () a
+Copyright   : (c) 2026 Eduardo Freitas Fernandes
+License     : MIT
+Maintainer  : eduardof.fernandes05@gmail.com
+Stability   : experimental
+
+This module provides simple helpers for working with the standard Maybe
+datatype, viewed through its base functor 'Either () a'.
+-}
 module Maybe where
 
-import Algebra
-  ( cond,
-    false,
-    i1,
-    i2,
-    nil,
-    nothing,
-    true,
-    (-|-),
-    (\/),
-  )
+import Algebra (
+  cond,
+  false,
+  i1,
+  i2,
+  nil,
+  nothing,
+  true,
+  (-|-),
+  (\/),
+ )
 
 -- Datatype definition -------------------------------------------------------------
 
