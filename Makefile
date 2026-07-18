@@ -22,3 +22,6 @@ haddock-open:
 
 repl:
 	cabal repl
+
+repl-test:
+	cabal repl test:endless-test

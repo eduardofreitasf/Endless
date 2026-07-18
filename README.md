@@ -1,59 +1,110 @@
 # Endless
 
-A Haskell library implementing fundamental functional combinators, recursion schemes, and algorithms using point-free programming, coproducts, and category-theoretic abstractions.
+A Haskell library implementing fundamental functional combinators, recursion schemes, and
+algorithms using point-free programming, coproducts, and category-theoretic abstractions.
+
+## Design Philosophy
+
+Endless is built around two interlocking ideas:
+
+1. **Point-free programming** — computations are expressed by composing primitive operators
+   (`/\`, `><`, `\/`, `-|-`, …) rather than by naming intermediate values. The `Algebra`
+   module is the foundation; every other module builds on top of it.
+
+2. **Recursion schemes** — every recursive datatype is equipped with a _base functor_ and
+   all traversals are expressed uniformly as:
+   - `cata` (catamorphism) — fold / consume a structure,
+   - `ana` (anamorphism) — unfold / produce a structure,
+   - `hylo` (hylomorphism) — unfold then immediately fold, fusing the two passes.
+
+This style follows the tradition of _Algebra of Programming_ (Bird & de Moor) and makes
+the structure of every algorithm explicit in its type.
+
+## Project Structure
+
+```
+Endless/
+├── lib/               # Library source modules
+│   ├── Algebra.hs     # Core combinators: products, coproducts, conditionals, while
+│   ├── Utils.hs       # Shared utilities (partition, …)
+|   └── ...            # Other modules (Nat, List, Maybe, BTree, ...)
+├── test/              # Test suite (Tasty + HUnit + QuickCheck)
+├── fourmolu.yaml      # Code formatter configuration
+├── Makefile           # Development task runner
+└── endless.cabal      # Build configuration
+```
 
 ## Getting Started
 
-Ensure you have [GHC](https://www.haskell.org/ghc/) and [Cabal](https://www.haskell.org/cabal/) installed via [ghcup](https://www.haskell.org/ghcup/).
+Ensure you have [GHC](https://www.haskell.org/ghc/) and [Cabal](https://www.haskell.org/cabal/)
+installed via [ghcup](https://www.haskell.org/ghcup/).
 
-### Compilation and Building
+All common tasks are available as `make` targets.
 
-To configure the project and build the library:
+## Development Commands
+
+### Build
 
 ```bash
-cabal build
+make build
 ```
 
-### Running Tests
-
-To run the full test suite:
+### Run Tests
 
 ```bash
-cabal test
+make test
 ```
 
 ### Interactive REPL (GHCi)
 
-To load the library in the interactive REPL:
-
 ```bash
-cabal repl
+make repl
 ```
 
-To load the test suite in the REPL:
+To load the test suite in the REPL directly:
 
 ```bash
-cabal repl test:algorithms-in-haskell-test
+make repl-test
 ```
 
-### Generating Documentation
+### Generate Documentation
 
-To generate Haddock HTML documentation for the codebase:
+Build Haddock HTML documentation:
 
 ```bash
-cabal haddock
+make haddock
 ```
 
-To build and open the generated documentation in your default web browser:
+Build and open the documentation in your default browser:
 
 ```bash
-cabal haddock --open
+make haddock-open
 ```
 
 ### Clean Build Artifacts
 
-To remove build files and clean the project directory:
-
 ```bash
 cabal clean
+```
+
+## Code Style
+
+The project uses [fourmolu](https://github.com/fourmolu/fourmolu) for formatting. Configuration lives in `fourmolu.yaml`.
+
+**Format all source files in-place:**
+
+```bash
+make format
+```
+
+**Check formatting without modifying files:**
+
+```bash
+make lint
+```
+
+Install `fourmolu` once with:
+
+```bash
+cabal install fourmolu
 ```
