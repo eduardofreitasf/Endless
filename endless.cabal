@@ -60,9 +60,11 @@ library
 
     -- Modules exported by the library.
     exposed-modules:  Algebra,
+                      Utils,
                       Maybe,
                       Nat,
-                      List
+                      List,
+                      BTree
 
     -- Modules included in this library but not exported.
     -- other-modules:
