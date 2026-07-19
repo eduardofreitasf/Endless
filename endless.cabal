@@ -64,7 +64,8 @@ library
                       Maybe,
                       Nat,
                       List,
-                      BTree
+                      BTree,
+                      LTree
 
     -- Modules included in this library but not exported.
     -- other-modules:
