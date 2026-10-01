@@ -16,7 +16,8 @@ enabling a point-free, recursion-scheme style of programming.
 module List where
 
 import Algebra
-import Nat (outNat)
+import LTree (hyloLTree)
+import Nat (for, outNat)
 
 -- Datatype definition -------------------------------------------------------------
 
@@ -106,17 +107,32 @@ lookUpList k = cataList (nothing \/ aux k)
  where
   aux t ((a, b), r) = if a == t then Just b else r
 
--- TODO
-
 -- | Sorts a list by repeatedly inserting each element into its correct position.
 insertionSort :: (Ord a) => [a] -> [a]
-insertionSort = undefined
+insertionSort = cataList (nil \/ insert)
+ where
+  insert (x, []) = [x]
+  insert (x, h : t)
+    | x <= h = x : h : t
+    | otherwise = h : insert (x, t)
 
--- TODO
-
--- | Sorts a list using the merge sort algorithm, expressed as a list hylomorphism.
+{- | Sorts a list using the merge sort algorithm, expressed as a hylomorphism
+over leaf trees.
+-}
 mergeSort :: (Ord a) => [a] -> [a]
-mergeSort = undefined
+mergeSort [] = []
+mergeSort xs = hyloLTree (either singl merge) split xs
+ where
+  singl x = [x]
+
+  split [x] = i1 x
+  split ys = i2 (splitAt (length ys `div` 2) ys)
+
+  merge ([], zs) = zs
+  merge (zs, []) = zs
+  merge (y : ys, z : zs)
+    | y <= z = y : merge (ys, z : zs)
+    | otherwise = z : merge (y : ys, zs)
 
 {- | Takes the first @n@ elements of a list, expressed as an anamorphism
 that stops when either the count reaches zero or the list is exhausted.
@@ -130,11 +146,9 @@ takeList = curry aux
   divide (n + 1, h : t) = i2 (h, (n, t))
   divide (_, _) = error "Invalid input"
 
--- TODO
-
 -- | Drops the first @n@ elements of a list.
 dropList :: Int -> [a] -> [a]
-dropList = undefined
+dropList n xs = for ((nil \/ p2) . outList) xs (max 0 n)
 
 {- | Computes the factorial of a natural number as a list hylomorphism:
 the coalgebra unfolds @n@ into the list @[n, n-1, .., 1]@ and the
