@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'endless.cabal'
+      - 'fourmolu.yaml'
+      - '.github/workflows/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'endless.cabal'
+      - 'fourmolu.yaml'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Code Formatting (Fourmolu)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Fourmolu
+        uses: fourmolu/fourmolu-action@v10
+        with:
+          options: "-m check"
+          pattern: |
+            lib/**/*.hs
+            test/**/*.hs
+
+  test:
+    name: Build & Test (GHC ${{ matrix.ghc }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ghc: ['9.6.7']
+        cabal: ['3.10']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up GHC and Cabal
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: ${{ matrix.ghc }}
+          cabal-version: ${{ matrix.cabal }}
+          cabal-update: true
+
+      - name: Restore cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cabal/store
+            dist-newstyle
+          key: ${{ runner.os }}-ghc-${{ matrix.ghc }}-cabal-${{ hashFiles('**/*.cabal') }}
+          restore-keys: |
+            ${{ runner.os }}-ghc-${{ matrix.ghc }}-
+
+      - name: Build Library & Tests
+        run: cabal build --enable-tests all
+
+      - name: Run Tests
+        run: cabal test --test-show-details=direct
+
+      - name: Check Haddock Documentation
+        run: cabal haddock --haddock-all
